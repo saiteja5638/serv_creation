@@ -1,11 +1,11 @@
-using app.interactions from '../db/interactions';
+using app.db from '../db/interactions';
 
 
 service CatalogService {
 
 
-    entity LOCATION_STB as projection on interactions.LOCATION_STB;
+    entity LOCATION_STB as projection on db.LOCATION_STB;
 
-    entity LOCATION as projection on interactions.LOCATION;
+    entity LOCATION as projection on db.LOCATION;
 
 }
