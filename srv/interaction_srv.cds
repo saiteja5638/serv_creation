@@ -9,5 +9,6 @@ service CatalogService {
     entity LOCATION as projection on db.LOCATION;
 
     entity LOCATION_IBP as projection on db.LOCATION_IBP;
+    
 
 }
