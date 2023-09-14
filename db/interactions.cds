@@ -60,9 +60,9 @@ entity SALES_HIS
       PRODUCT_ID           : String(40);
       PROD_AVAILABILITY_DT : Date;
       CLASS                : String(18);
-      CLASS_NUM            : Integer64;
-      CHARACTERSTIC_NUM    : Integer64;
-      VALUE_NUM            : Integer64;
+      CLASS_NUM            : String(10);
+      CHARACTERSTIC_NUM    : String(10);
+      VALUE_NUM            : String(15);
       CHANGED_DATE         : Date;
       CHANGED_TIME         : Time;
       CHANGED_BY           : String(12);
