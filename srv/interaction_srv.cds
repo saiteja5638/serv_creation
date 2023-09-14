@@ -10,7 +10,11 @@ service CatalogService {
 
     entity LOCATION_IBP as projection on db.LOCATION_IBP;
 
-     entity SALES_HISTORY as projection on db.SALES_HIS;
+    entity SALES_HISTORY as projection on db.SALES_HIS;
     
+    entity SALES as projection on db.SALES1;
 
+    entity PRODUCT as projection on db.PRODUCT;
+    
+       
 }
