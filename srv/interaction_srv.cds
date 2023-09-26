@@ -1,5 +1,6 @@
 using app.db from '../db/interactions';
 
+
 service CatalogService {
 
     entity LOCATION               as projection on db.LOCATION; //location
