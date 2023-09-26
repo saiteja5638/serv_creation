@@ -1,41 +1,90 @@
-_schema-version: '3.1'
+_schema-version: "3.1"
 ID: cap_services
+description: A simple CAP project.
 version: 1.0.0
-description: "A simple CAP project."
+modules:
+- name: cap_services-srv
+  type: nodejs
+  path: gen/srv
+  requires:
+  - name: cap_services-db
+  provides:
+  - name: srv-api
+    properties:
+      srv-url: ${default-url}
+  parameters:
+    buildpack: nodejs_buildpack
+  build-parameters:
+    builder: npm
+- name: cap_services-db-deployer
+  type: hdb
+  path: db
+  requires:
+  - name: cap_services-db
+  parameters:
+    buildpack: nodejs_buildpack
+- name: cap_services-destination-content
+  type: com.sap.application.content
+  requires:
+  - name: cap_services-destination-service
+    parameters:
+      content-target: true
+  - name: cap_services_html_repo_host
+    parameters:
+      service-key:
+        name: cap_services_html_repo_host-key
+  - name: uaa_cap_services
+    parameters:
+      service-key:
+        name: uaa_cap_services-key
+  parameters:
+    content:
+      instance:
+        destinations:
+        - Name: cap_servs_approuter_cap_services_html_repo_host
+          ServiceInstanceName: cap_services-html5-app-host-service
+          ServiceKeyName: cap_services_html_repo_host-key
+          sap.cloud.service: cap_servs_approuter
+        - Authentication: OAuth2UserTokenExchange
+          Name: cap_servs_approuter_uaa_cap_services
+          ServiceInstanceName: cap_services-xsuaa-service
+          ServiceKeyName: uaa_cap_services-key
+          sap.cloud.service: cap_servs_approuter
+        existing_destinations_policy: ignore
+  build-parameters:
+    no-source: true
+resources:
+- name: cap_services-db
+  type: com.sap.xs.hdi-container
+  parameters:
+    service: hana
+    service-plan: hdi-shared
+- name: cap_services-destination-service
+  type: org.cloudfoundry.managed-service
+  parameters:
+    config:
+      HTML5Runtime_enabled: true
+      version: 1.0.0
+    service: destination
+    service-name: cap_services-destination-service
+    service-plan: lite
+- name: cap_services_html_repo_host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-name: cap_services-html5-app-host-service
+    service-plan: app-host
+- name: uaa_cap_services
+  type: org.cloudfoundry.managed-service
+  parameters:
+    path: ./xs-security.json
+    service: xsuaa
+    service-name: cap_services-xsuaa-service
+    service-plan: application
 parameters:
   enable-parallel-deployments: true
 build-parameters:
   before-all:
-    - builder: custom
-      commands:
-        - npx cds build --production
-modules:
-  - name: cap_services-srv
-    type: nodejs
-    path: gen/srv
-    parameters:
-      buildpack: nodejs_buildpack
-    
-    build-parameters:
-      builder: npm
-    provides:
-      - name: srv-api # required by consumers of CAP services (e.g. approuter)
-        properties:
-          srv-url: ${default-url}
-    requires:
-      - name: cap_services-db
-
-  - name: cap_services-db-deployer
-    type: hdb
-    path: db
-    parameters:
-      buildpack: nodejs_buildpack
-    requires:
-      - name: cap_services-db
-
-resources:
-  - name: cap_services-db
-    type: com.sap.xs.hdi-container
-    parameters:
-      service: hana
-      service-plan: hdi-shared
+  - builder: custom
+    commands:
+    - npx cds build --production
