@@ -1,7 +1,7 @@
 using app.database from '../db/interactions';
 
 
-service CatalogService {
+service CatalogService @(requires: 'authenticated-user'){
 
     entity LOCATION               as projection on database.LOCATION; //location
     entity LOCATION_IBP           as projection on database.LOCATION_IBP; //location_ibp
@@ -62,7 +62,6 @@ service CatalogService {
     entity PROD_ACC_NODE_STB      as projection on database.PROD_ACC_NODE_STB;
 
     //order seperate table
-    @requires: 'authenticated-user'
     entity ORDER as projection on database.ORDER;
 
 }
