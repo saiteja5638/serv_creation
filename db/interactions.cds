@@ -1,4 +1,4 @@
-namespace app.db;
+namespace app.database;
 // location_stb
 entity LOCATION_STB {
   key LOCATION_ID    : String(4);
@@ -807,4 +807,17 @@ entity MAIN_MRP{
 entity MAIN_MRP_STB{
    key LOCATION_ID :String(4);
    key MRP_GROUP :String(4);
+}
+
+entity ORDER {
+  key VBELN:String(10);
+      ERDAT:Date;
+      ERZET:Time;
+      ERNAM:String(12);
+      ANGDT:Date;
+      BNDDT:Date;
+      AUDAT:Date;
+      VBTYP:String(4);
+      TRVOG:String(1);
+      AUART:String(10);
 }

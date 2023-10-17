@@ -9,7 +9,9 @@
     "@sap/cds": "^6.8.4",
     "@sap/cds-hana": "^2",
     "@sap/cds-odata-v2-adapter-proxy": "^1.9.21",
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "@sap/xssec": "^3",
+    "passport": "^0"
   },
   "scripts": {
     "start": "cds-serve"
@@ -18,7 +20,7 @@
     "hana": {
       "deploy-format": "hdbtable",
       "syntax": "hdi"
-  },
+    },
     "build": {
       "tasks": [
         {
@@ -33,7 +35,8 @@
     "requires": {
       "db": {
         "kind": "hana"
-      }
+      },
+      "auth": "xsuaa"
     }
   }
 }
