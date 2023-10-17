@@ -41,8 +41,8 @@
       "auth": {
         "kind": "basic",
         "users": {
-          "saiteja": {
-            "password": "Spark@5638",
+          "sbpcorp": {
+            "password": "sbpcorp123",
             "roles": [],
             "attr": {}
           }
