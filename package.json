@@ -37,17 +37,11 @@
     "requires": {
       "db": {
         "kind": "sql"
-      }, 
-      "auth": {
-        "kind": "basic",
-        "users": {
-          "sbpcorp": {
-            "password": "sbpcorp123",
-            "roles": [],
-            "attr": {}
-          }
-        }
-      }
+      },
+      "auth": "xsuaa"
     }
+  },
+  "devDependencies": {
+    "@sap/cds-dk": "^7"
   }
 }

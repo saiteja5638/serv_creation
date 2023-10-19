@@ -1,7 +1,7 @@
 using app.database from '../db/interactions';
 
 
-service CatalogService @(requires: 'authenticated-user'){
+service CatalogService {
 
     entity LOCATION               as projection on database.LOCATION; //location
     entity LOCATION_IBP           as projection on database.LOCATION_IBP; //location_ibp
@@ -27,14 +27,13 @@ service CatalogService @(requires: 'authenticated-user'){
     entity PROD_ACC_NODE          as projection on database.PROD_ACC_NODE; //productaccessnode
     entity MAINT_MRP               as projection on database.MAIN_MRP;//maintain mrp
     
-
     //standby tables
     entity LOCATION_STB           as projection on database.LOCATION_STB; //location_standby
     entity PRODUCT_STB            as projection on database.PRODUCT_STB; //product_stb
     entity DERIVECHAR_STB         as projection on database.DERIVECHAR_STB; //derive_stb characteristcs
     entity CUSTOMERS_STB          as projection on database.CUSTOMERS_STB; // customers_stb
     entity MAINT_MRP_STB           as projection on database.MAIN_MRP_STB; // maintain mrp_stb
-
+    @requires: 'authenticated-user'
     // PRODUCT AND ATTRIBUTES EXTRACT stand by
     entity CLASS_C_STB            as projection on database.CLASS_C_STB;
     entity PROD_CLASS_STB         as projection on database.PROD_CLASS_STB;
