@@ -7,6 +7,7 @@ service CatalogService {
     entity LOCATION_IBP           as projection on database.LOCATION_IBP; //location_ibp
     entity SALES_HIS              as projection on database.SALES_HIS; //sales history
     entity SALES                  as projection on database.SALES1; //sales
+    @requires: 'authenticated-user'
     entity PRODUCT                as projection on database.PRODUCT; //product
     entity DERIVECHAR             as projection on database.DERIVECHAR; //derivecharacter
     entity MAT_LTE_MDATA          as projection on database.MAT_LTE_MDATA; //materiallitemdata
@@ -33,7 +34,6 @@ service CatalogService {
     entity DERIVECHAR_STB         as projection on database.DERIVECHAR_STB; //derive_stb characteristcs
     entity CUSTOMERS_STB          as projection on database.CUSTOMERS_STB; // customers_stb
     entity MAINT_MRP_STB           as projection on database.MAIN_MRP_STB; // maintain mrp_stb
-    @requires: 'authenticated-user'
     // PRODUCT AND ATTRIBUTES EXTRACT stand by
     entity CLASS_C_STB            as projection on database.CLASS_C_STB;
     entity PROD_CLASS_STB         as projection on database.PROD_CLASS_STB;
