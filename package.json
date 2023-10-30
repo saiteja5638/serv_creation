@@ -38,8 +38,7 @@
     "requires": {
       "db": {
         "kind": "sql"
-      },
-      "auth": "xsuaa"
+      }
     }
   }
 }

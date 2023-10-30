@@ -23,15 +23,6 @@ modules:
           srv-url: ${default-url}
     requires:
       - name: cap_services-db
-      - name: config
-
-  - name: cap_services
-    type: approuter.nodejs
-    path: app/
-    parameters:
-      keep-existing-routes: true
-      disk-quota: 256M
-      memory: 256M
 
   - name: cap_services-db-deployer
     type: hdb
@@ -47,12 +38,3 @@ resources:
     parameters:
       service: hana
       service-plan: hdi-shared
-  - name: config
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: xsuaa
-      service-plan: application
-      path: ./xs-security.json
-      config:
-        xsappname: cap_services-${org}-${space}
-        tenant-mode: dedicated
