@@ -1,8 +1,11 @@
 using app.database from '../db/interactions';
 
-
 service CatalogService  {
-    
+    @requires: 'Admin'
+    @restrict: [{
+        grant: 'READ',
+        where: 'LANGU = ''EN'''
+    }]
     entity LOCATION               as projection on database.LOCATION; //location
     entity LOCATION_IBP           as projection on database.LOCATION_IBP; //location_ibp
     entity SALES_HIS              as projection on database.SALES_HIS; //sales history

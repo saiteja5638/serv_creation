@@ -38,6 +38,15 @@
     "requires": {
       "db": {
         "kind": "sql"
+      },
+      "uaa": {
+        "kind": "xsuaa"
+      },
+      "auth": {
+        "[production]": {
+          "strategy": "JWT"
+        },
+        "kind": "xsuaa"
       }
     }
   }
