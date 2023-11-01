@@ -1,16 +1,12 @@
 using app.database from '../db/interactions';
 
-service CatalogService  {
-    @requires: 'Admin'
-    @restrict: [{
-        grant: 'READ',
-        where: 'LANGU = ''EN'''
-    }]
+service CatalogService {
+    @(requires: 'authenticated-user')
     entity LOCATION               as projection on database.LOCATION; //location
     entity LOCATION_IBP           as projection on database.LOCATION_IBP; //location_ibp
     entity SALES_HIS              as projection on database.SALES_HIS; //sales history
     entity SALES                  as projection on database.SALES1; //sales
-    @(requires: 'authenticated-user')
+    
     entity PRODUCT    as projection on database.PRODUCT; //product
             
     entity DERIVECHAR             as projection on database.DERIVECHAR; //derivecharacter
