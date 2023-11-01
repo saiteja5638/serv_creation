@@ -24,6 +24,8 @@ modules:
     requires:
       - name: cap_services-db
       - name: myhanaapp
+      - name: cap_services-connectivity
+      - name: cap_services-destination
 
   - name: cap_services-db-deployer
     type: hdb
@@ -64,3 +66,13 @@ resources:
       config:
         xsappname: myhanaapp
         tenant-mode: dedicated
+  - name: cap_services-connectivity
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: connectivity
+      service-plan: lite
+  - name: cap_services-destination
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: destination
+      service-plan: lite

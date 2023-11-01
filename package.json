@@ -47,6 +47,12 @@
           "strategy": "JWT"
         },
         "kind": "xsuaa"
+      },
+      "[production]": {
+        "auth": {
+          "kind": "xsuaa"
+        },
+        "destinations": true
       }
     }
   }
