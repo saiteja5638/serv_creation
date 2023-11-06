@@ -1,1 +1,17 @@
-{}
+{
+	"auth": {
+		"passport": {
+			"strategy": "mock",
+			"users": {
+				"sbpcorp": {
+					"password": "sbpcorp123",
+					"ID": "sbpcorp123",
+					"roles": [
+						"authenticated-user"
+					]
+				}
+			}
+		}
+	}
+}
+

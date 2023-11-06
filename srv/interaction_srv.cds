@@ -1,7 +1,8 @@
 using app.database from '../db/interactions';
-
+@path     : '/Catalog'
+@(requires: 'authenticated-user')
 service CatalogService {
-    @(requires: 'authenticated-user')
+    
     entity LOCATION               as projection on database.LOCATION; //location
     entity LOCATION_IBP           as projection on database.LOCATION_IBP; //location_ibp
     entity SALES_HIS              as projection on database.SALES_HIS; //sales history
