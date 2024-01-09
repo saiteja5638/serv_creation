@@ -1,53 +1,55 @@
 {
-  "name": "cap_services",
-  "version": "1.0.0",
-  "description": "A simple CAP project.",
-  "repository": "<Add your repository here>",
-  "license": "UNLICENSED",
-  "private": true,
-  "dependencies": {
-    "@sap/cds": "^6.8.4",
-    "@sap/cds-hana": "^2",
-    "@sap/cds-odata-v2-adapter-proxy": "^1.9.21",
-    "@sap/xsenv": "^4.1.0",
-    "@sap/xssec": "^2.2.5",
-    "express": "^4.18.2",
-    "jsonwebtoken": "^9.0.2",
-    "passport": "^0.6.0",
-    "sql": "^0.78.0",
-    "sqlite3": "^5.1.6"
-  },
-  "scripts": {
-    "start": "cds-serve"
-  },
-  "cds": {
-    "hana": {
-      "deploy-format": "hdbtable",
-      "syntax": "hdi"
+    "name": "cap_services",
+    "version": "1.0.0",
+    "description": "A simple CAP project.",
+    "repository": "<Add your repository here>",
+    "license": "UNLICENSED",
+    "private": true,
+    "dependencies": {
+        "@sap/cds": "^6.8.4",
+        "@sap/cds-hana": "^2",
+        "@sap/cds-odata-v2-adapter-proxy": "^1.9.7",
+        "@sap/xsenv": "^4.1.0",
+        "@sap/xssec": "^3.6.0",
+        "express": "^4.18.2",
+        "jsonwebtoken": "^9.0.2",
+        "passport": "^0.6.0",
+        "sql": "^0.78.0",
+        "sqlite3": "^5.1.6"
     },
-    "build": {
-      "tasks": [
-        {
-          "for": "hana",
-          "dest": "../db"
+    "scripts": {
+        "start": "cds-serve",
+        "undeploy": "cf undeploy cap_services --delete-services --delete-service-keys --delete-service-brokers",
+        "build": "rimraf resources mta_archives && mbt build --mtar archive",
+        "deploy": "cf deploy mta_archives/archive.mtar --retries 1"
+    },
+    "cds": {
+        "hana": {
+            "deploy-format": "hdbtable",
+            "syntax": "hdi"
         },
-        {
-          "for": "node-cf"
+        "build": {
+            "tasks": [
+                {
+                    "for": "hana",
+                    "dest": "../db"
+                },
+                {
+                    "for": "node-cf"
+                }
+            ]
+        },
+        "requires": {
+            "db": {
+                "kind": "sql"
+            },
+            "auth": {
+                "kind": "xsuaa"
+            }
         }
-      ]
     },
-    "requires": {
-      "db": {
-        "kind": "sql"
-      },
-      "uaa": {
-        "kind": "xsuaa"
-      },
-      "auth": {
-        "[production]": {
-          "strategy": "JWT"
-        }
-      }
+    "devDependencies": {
+        "@sap/cds-dk": "^7",
+        "rimraf": "^3.0.2"
     }
-  }
 }

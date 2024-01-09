@@ -2,14 +2,15 @@ using app.database from '../db/interactions';
 
 
 service CatalogService {
-    @(requires: 'authenticated-user')
+   @requires: 'authenticated-user'
     entity LOCATION               as projection on database.LOCATION; //location
     entity LOCATION_IBP           as projection on database.LOCATION_IBP; //location_ibp
     entity SALES_HIS              as projection on database.SALES_HIS; //sales history
     entity SALES                  as projection on database.SALES1; //sales
     
     entity PRODUCT    as projection on database.PRODUCT; //product
-            
+      @requires: 'Admin'
+@restrict: [{ grant: 'READ', where: 'LANGU = ''DE'''}]      
     entity DERIVECHAR             as projection on database.DERIVECHAR; //derivecharacter
     entity MAT_LTE_MDATA          as projection on database.MAT_LTE_MDATA; //materiallitemdata
     entity CUSTOMERS              as projection on database.CUSTOMERS; //customers
